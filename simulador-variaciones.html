@@ -14,98 +14,191 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: #f5f7fa;
-            padding: 0;
+            padding: 32px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 880px;
+            max-width: 700px;
             margin: 0 auto;
+        }
+
+        /* TOGGLE PRINCIPAL DE ACTIVACIÓN */
+        .activation-section {
             background: white;
-            min-height: 100vh;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
         }
 
-        .header {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 24px 32px;
-        }
-
-        .header-breadcrumb {
-            font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 12px;
-        }
-
-        .header-breadcrumb a {
-            color: #3b82f6;
-            text-decoration: none;
-        }
-
-        .header-title {
+        .activation-header {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            margin-bottom: 8px;
         }
 
-        .header-icon {
-            font-size: 24px;
-        }
-
-        .header h1 {
-            font-size: 20px;
+        .activation-title {
+            font-size: 16px;
             font-weight: 600;
             color: #111827;
         }
 
-        .header-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            background: #dbeafe;
-            color: #1e40af;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            border-radius: 4px;
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
         }
 
-        .content {
-            padding: 32px;
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
 
-        .section {
-            margin-bottom: 40px;
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #d1d5db;
+            transition: 0.3s;
+            border-radius: 24px;
         }
 
-        .section-header {
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e5e7eb;
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
         }
 
-        .section-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 4px;
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: #3b82f6;
         }
 
-        .section-description {
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .activation-description {
             font-size: 13px;
             color: #6b7280;
             line-height: 1.5;
         }
 
-        /* Form groups */
+        /* PANEL DE CONFIGURACIÓN */
+        .config-panel {
+            display: none;
+        }
+
+        .config-panel.active {
+            display: block;
+        }
+
+        /* SECCIÓN COLAPSABLE */
+        .collapsible-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: #f9fafb;
+        }
+
+        .section-header-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .section-header-text {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+
+        .section-description {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .section-summary {
+            font-size: 12px;
+            color: #3b82f6;
+            font-weight: 500;
+        }
+
+        .section-badge {
+            padding: 2px 8px;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .collapse-icon {
+            font-size: 18px;
+            color: #9ca3af;
+            transition: transform 0.2s;
+        }
+
+        .collapsible-section.collapsed .collapse-icon {
+            transform: rotate(0deg);
+        }
+
+        .collapsible-section:not(.collapsed) .collapse-icon {
+            transform: rotate(90deg);
+        }
+
+        .section-content {
+            padding: 0 20px 20px 20px;
+            display: block;
+        }
+
+        .collapsible-section.collapsed .section-content {
+            display: none;
+        }
+
+        /* FORM ELEMENTS */
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #374151;
             margin-bottom: 8px;
@@ -144,7 +237,6 @@
             border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 1000;
-            pointer-events: none;
         }
 
         .tooltip-icon:hover::before {
@@ -159,16 +251,15 @@
             z-index: 1001;
         }
 
-        /* Presets pills */
+        /* PRESET PILLS */
         .preset-pills {
             display: flex;
             gap: 8px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
+            margin-bottom: 12px;
         }
 
         .preset-pill {
-            padding: 6px 14px;
+            padding: 6px 12px;
             background: white;
             border: 1px solid #d1d5db;
             border-radius: 6px;
@@ -190,85 +281,69 @@
             color: white;
         }
 
-        /* Días de la semana */
+        /* DÍAS DE LA SEMANA */
         .days-selector {
-            display: flex;
-            gap: 6px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
         }
 
-        .day-checkbox {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 44px;
+        .day-button {
+            height: 48px;
             background: white;
             border: 1px solid #d1d5db;
             border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.15s;
-            user-select: none;
-        }
-
-        .day-checkbox input {
-            display: none;
-        }
-
-        .day-checkbox span {
             font-size: 14px;
             font-weight: 500;
             color: #6b7280;
-        }
-
-        .day-checkbox:hover {
-            background: #f9fafb;
-            border-color: #9ca3af;
-        }
-
-        .day-checkbox.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
-        }
-
-        .day-checkbox.active span {
-            color: white;
-        }
-
-        /* Festivos toggle */
-        .festivo-toggle {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            background: white;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
             cursor: pointer;
             transition: all 0.15s;
-            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .festivo-toggle:hover {
+        .day-button:hover {
             background: #f9fafb;
             border-color: #9ca3af;
         }
 
-        .festivo-toggle.active {
-            background: #fef3c7;
-            border-color: #fbbf24;
+        .day-button.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+            font-weight: 600;
         }
 
-        .festivo-toggle input {
-            margin-right: 10px;
+        /* FESTIVOS CHECKBOX */
+        .festivo-row {
+            padding: 12px 16px;
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+        }
+
+        .festivo-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
         }
 
-        .festivo-toggle span {
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
+        .festivo-checkbox input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
 
-        /* Radio buttons */
+        .festivo-checkbox label {
+            font-size: 14px;
+            color: #92400e;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* RADIO BUTTONS */
         .radio-group {
             display: flex;
             flex-direction: column;
@@ -284,7 +359,6 @@
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.15s;
-            user-select: none;
         }
 
         .radio-item:hover {
@@ -297,20 +371,20 @@
             border-color: #3b82f6;
         }
 
-        .radio-item input[type="radio"] {
+        .radio-item input {
             margin-right: 10px;
             cursor: pointer;
         }
 
         .radio-item label {
-            cursor: pointer;
             font-size: 14px;
             color: #374151;
-            flex: 1;
             font-weight: 500;
+            cursor: pointer;
+            flex: 1;
         }
 
-        /* Selects */
+        /* SELECTS */
         select {
             width: 100%;
             padding: 10px 14px;
@@ -318,7 +392,6 @@
             border-radius: 6px;
             background: white;
             font-size: 14px;
-            font-weight: 400;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -333,20 +406,14 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        select:disabled {
-            background: #f3f4f6;
-            color: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        /* Info boxes (solo para warnings importantes) */
+        /* INFO BOX */
         .info-box {
-            background: #dbeafe;
-            border-left: 3px solid #3b82f6;
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
             padding: 12px 14px;
             border-radius: 4px;
             font-size: 13px;
-            color: #1e40af;
+            color: #92400e;
             line-height: 1.5;
             margin-top: 12px;
         }
@@ -355,21 +422,7 @@
             font-weight: 600;
         }
 
-        .warning-box {
-            background: #fef3c7;
-            border-left: 3px solid #f59e0b;
-            padding: 12px 14px;
-            border-radius: 4px;
-            font-size: 13px;
-            color: #92400e;
-            line-height: 1.5;
-        }
-
-        .warning-box strong {
-            font-weight: 600;
-        }
-
-        /* Tabla de políticas */
+        /* TABLA DE POLÍTICAS */
         .policy-table {
             border: 1px solid #e5e7eb;
             border-radius: 6px;
@@ -393,7 +446,6 @@
             padding: 16px;
             border-bottom: 1px solid #e5e7eb;
             align-items: center;
-            transition: background 0.15s;
             background: white;
         }
 
@@ -414,316 +466,411 @@
         .policy-employees {
             font-size: 13px;
             color: #6b7280;
-            font-weight: 400;
         }
 
-        .policy-footer {
-            padding: 12px 16px;
-            background: #fef3c7;
-            font-size: 13px;
-            color: #92400e;
+        /* BOTONES */
+        .actions-row {
             display: flex;
-            align-items: center;
-            gap: 6px;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
         }
 
-        .policy-footer-icon {
+        .btn-primary {
+            flex: 1;
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
             font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            padding: 10px 20px;
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="header-breadcrumb">
-                <a href="#">Configuración</a> › <a href="#">Planificación y registro horario</a> › Compensaciones especiales
+        <!-- ACTIVACIÓN ON/OFF -->
+        <div class="activation-section">
+            <div class="activation-header">
+                <div>
+                    <h2 class="activation-title">Variaciones de jornada</h2>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-activacion" onchange="toggleActivacion()">
+                    <span class="toggle-slider"></span>
+                </label>
             </div>
-            <div class="header-title">
-                <span class="header-icon">⚙️</span>
-                <h1>Configuración de Variaciones de Jornada</h1>
-                <span class="header-badge">Beta</span>
-            </div>
+            <p class="activation-description">
+                Calcula y compensa automáticamente las diferencias entre horas planificadas y registradas cada mes
+            </p>
         </div>
 
-        <div class="content">
-            <!-- SECCIÓN 1: Jornada laboral -->
-            <div class="section">
-                <div class="section-header">
-                    <div class="section-title">Jornada laboral</div>
-                    <div class="section-description">Define qué días de la semana se tienen en cuenta para calcular variaciones</div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        Días laborables
-                        <span class="tooltip-icon" data-tooltip="Las variaciones solo se calculan en los días activos">ⓘ</span>
-                    </div>
-                    <div class="preset-pills">
-                        <div class="preset-pill active" data-preset="lv">L-V</div>
-                        <div class="preset-pill" data-preset="ls">L-S</div>
-                        <div class="preset-pill" data-preset="ld">L-D</div>
-                        <div class="preset-pill" data-preset="custom">Personalizado</div>
-                    </div>
-                    <div class="days-selector">
-                        <label class="day-checkbox active" data-day="1">
-                            <input type="checkbox" checked>
-                            <span>L</span>
-                        </label>
-                        <label class="day-checkbox active" data-day="2">
-                            <input type="checkbox" checked>
-                            <span>M</span>
-                        </label>
-                        <label class="day-checkbox active" data-day="3">
-                            <input type="checkbox" checked>
-                            <span>X</span>
-                        </label>
-                        <label class="day-checkbox active" data-day="4">
-                            <input type="checkbox" checked>
-                            <span>J</span>
-                        </label>
-                        <label class="day-checkbox active" data-day="5">
-                            <input type="checkbox" checked>
-                            <span>V</span>
-                        </label>
-                        <label class="day-checkbox" data-day="6">
-                            <input type="checkbox">
-                            <span>S</span>
-                        </label>
-                        <label class="day-checkbox" data-day="7">
-                            <input type="checkbox">
-                            <span>D</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        Festivos
-                        <span class="tooltip-icon" data-tooltip="Activado: festivos entran en el cálculo. Desactivado: no">ⓘ</span>
-                    </div>
-                    <label class="festivo-toggle active">
-                        <input type="checkbox" id="festivos" checked>
-                        <span>Incluir festivos en el cálculo</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- SECCIÓN 2: Modo de compensación -->
-            <div class="section">
-                <div class="section-header">
-                    <div class="section-title">Revisión de la compensación</div>
-                    <div class="section-description">Elige cómo se gestionan las compensaciones</div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        Modo de compensación
-                        <span class="tooltip-icon" data-tooltip="Configuración única: aplica a todos. Por política: reglas por grupo">ⓘ</span>
-                    </div>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" name="compensation-config" id="config-global" value="global">
-                            <label for="config-global">Configuración única para todos</label>
+        <!-- PANEL DE CONFIGURACIÓN (solo visible cuando está activado) -->
+        <div class="config-panel" id="config-panel">
+            
+            <!-- SECCIÓN 1: JORNADA LABORAL -->
+            <div class="collapsible-section collapsed" id="section-jornada">
+                <div class="section-header" onclick="toggleSection('section-jornada')">
+                    <div class="section-header-left">
+                        <div class="section-header-text">
+                            <div class="section-title">Jornada laboral</div>
+                            <div class="section-description">Define qué días de la semana se tienen en cuenta para calcular variaciones</div>
+                            <div class="section-summary" id="summary-jornada">L-V • Festivos incluidos</div>
                         </div>
-                        <div class="radio-item">
-                            <input type="radio" name="compensation-config" id="config-policy" value="policy" checked>
-                            <label for="config-policy">Por política de registro</label>
+                    </div>
+                    <div class="collapse-icon">▶</div>
+                </div>
+                <div class="section-content">
+                    <div class="form-group">
+                        <div class="form-label">
+                            Días laborables
+                            <span class="tooltip-icon" data-tooltip="Las variaciones solo se calculan en los días activos">ⓘ</span>
+                        </div>
+                        <div class="preset-pills">
+                            <div class="preset-pill active" onclick="applyPreset('lv')">L-V</div>
+                            <div class="preset-pill" onclick="applyPreset('ls')">L-S</div>
+                            <div class="preset-pill" onclick="applyPreset('ld')">L-D</div>
+                            <div class="preset-pill" onclick="applyPreset('custom')">Personalizado</div>
+                        </div>
+                        <div class="days-selector">
+                            <button class="day-button active" data-day="1" onclick="toggleDay(1)">L</button>
+                            <button class="day-button active" data-day="2" onclick="toggleDay(2)">M</button>
+                            <button class="day-button active" data-day="3" onclick="toggleDay(3)">X</button>
+                            <button class="day-button active" data-day="4" onclick="toggleDay(4)">J</button>
+                            <button class="day-button active" data-day="5" onclick="toggleDay(5)">V</button>
+                            <button class="day-button" data-day="6" onclick="toggleDay(6)">S</button>
+                            <button class="day-button" data-day="7" onclick="toggleDay(7)">D</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            Festivos
+                            <span class="tooltip-icon" data-tooltip="Activado: festivos entran en el cálculo. Desactivado: no">ⓘ</span>
+                        </div>
+                        <div class="festivo-row">
+                            <div class="festivo-checkbox">
+                                <input type="checkbox" id="festivos-check" checked>
+                                <label for="festivos-check">Incluir festivos en el cálculo</label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SECCIÓN 3A: Configuración Global -->
-            <div class="section" id="global-config" style="display: none;">
-                <div class="section-header">
-                    <div class="section-title">Configuración global</div>
-                    <div class="section-description">Esta configuración se aplicará a <strong>todos los empleados</strong> por igual</div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        Modo de compensación
-                        <span class="tooltip-icon" data-tooltip="Revisión: requiere aprobación del manager. Automática: se aplica sin aprobación">ⓘ</span>
+            <!-- SECCIÓN 2: REVISIÓN DE LA COMPENSACIÓN -->
+            <div class="collapsible-section collapsed" id="section-revision">
+                <div class="section-header" onclick="toggleSection('section-revision')">
+                    <div class="section-header-left">
+                        <div class="section-header-text">
+                            <div class="section-title">Revisión de la compensación</div>
+                            <div class="section-description">Elige cómo se gestionan las compensaciones</div>
+                            <div class="section-summary" id="summary-revision">Configuración única para todos</div>
+                        </div>
                     </div>
-                    <select id="global-mode">
-                        <option value="revision" selected>Revisión del manager</option>
-                        <option value="automatica">Automática</option>
-                    </select>
+                    <div class="collapse-icon">▶</div>
                 </div>
-
-                <div class="form-group" id="global-tipo-group">
-                    <div class="form-label">
-                        Tipo de compensación
-                        <span class="tooltip-icon" data-tooltip="Holidays: añade horas a bolsa de vacaciones. Monetario: pago en nómina">ⓘ</span>
+                <div class="section-content">
+                    <div class="form-group">
+                        <div class="form-label">
+                            Modo de compensación
+                            <span class="tooltip-icon" data-tooltip="Configuración única: aplica a todos. Por política: reglas por grupo">ⓘ</span>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" name="modo-config" id="modo-global" value="global" checked onchange="toggleModoConfig()">
+                                <label for="modo-global">Configuración única para todos</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="modo-config" id="modo-policy" value="policy" onchange="toggleModoConfig()">
+                                <label for="modo-policy">Por ámbito de aplicación</label>
+                            </div>
+                        </div>
                     </div>
-                    <select id="global-tipo">
-                        <option value="holidays" selected>Holidays (tiempo libre)</option>
-                        <option value="monetario">Monetario (en nómina)</option>
-                    </select>
-                </div>
-
-                <div class="warning-box">
-                    <strong>📊 Impacto:</strong><br>
-                    • Modo <strong>Revisión</strong> → <span id="global-impact-revision">481 empleados en lista del manager</span><br>
-                    • Modo <strong>Automática</strong> → <span id="global-impact-auto" style="display: none;">0 empleados en lista (todos auto-compensados)</span>
                 </div>
             </div>
 
-            <!-- SECCIÓN 3B: Políticas -->
-            <div class="section" id="policy-config">
-                <div class="section-header">
-                    <div class="section-title">Políticas de compensación</div>
-                    <div class="section-description">Define cómo se compensa cada política de registro</div>
+            <!-- SECCIÓN 3: CONFIGURACIÓN GLOBAL -->
+            <div class="collapsible-section collapsed" id="section-global">
+                <div class="section-header" onclick="toggleSection('section-global')">
+                    <div class="section-header-left">
+                        <div class="section-header-text">
+                            <div class="section-title">Configuración global</div>
+                            <div class="section-description">Esta configuración se aplicará a <strong>todos los empleados</strong> por igual</div>
+                            <div class="section-summary" id="summary-global">Revisión del manager • Holidays</div>
+                        </div>
+                    </div>
+                    <div class="collapse-icon">▶</div>
                 </div>
-
-                <div class="policy-table">
-                    <div class="policy-table-header">
-                        <div>Política</div>
-                        <div>Modo</div>
-                        <div>Tipo</div>
-                        <div>Empleados</div>
-                    </div>
-                    
-                    <div class="policy-table-row" data-policy="ett">
-                        <div class="policy-name">ETT Eventos</div>
-                        <div>
-                            <select class="policy-mode-select" data-policy="ett">
-                                <option value="revision">Revisión</option>
-                                <option value="automatica" selected>Automática</option>
-                                <option value="no_compensar">No compensar</option>
-                            </select>
+                <div class="section-content">
+                    <div class="form-group">
+                        <div class="form-label">
+                            Modo de compensación
+                            <span class="tooltip-icon" data-tooltip="Revisión: requiere aprobación del manager. Automática: se aplica sin aprobación">ⓘ</span>
                         </div>
-                        <div>
-                            <select class="policy-tipo-select" data-policy="ett">
-                                <option value="holidays">Holidays</option>
-                                <option value="monetario" selected>Monetario</option>
-                            </select>
-                        </div>
-                        <div class="policy-employees">150</div>
-                    </div>
-                    
-                    <div class="policy-table-row" data-policy="oficina">
-                        <div class="policy-name">Oficina</div>
-                        <div>
-                            <select class="policy-mode-select" data-policy="oficina">
-                                <option value="revision" selected>Revisión</option>
-                                <option value="automatica">Automática</option>
-                                <option value="no_compensar">No compensar</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select class="policy-tipo-select" data-policy="oficina">
-                                <option value="holidays" selected>Holidays</option>
-                                <option value="monetario">Monetario</option>
-                            </select>
-                        </div>
-                        <div class="policy-employees">30</div>
-                    </div>
-                    
-                    <div class="policy-table-row" data-policy="managers">
-                        <div class="policy-name">Managers</div>
-                        <div>
-                            <select class="policy-mode-select" data-policy="managers">
-                                <option value="revision">Revisión</option>
-                                <option value="automatica">Automática</option>
-                                <option value="no_compensar" selected>No compensar</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select class="policy-tipo-select" data-policy="managers" disabled>
-                                <option value="">—</option>
-                            </select>
-                        </div>
-                        <div class="policy-employees">10</div>
+                        <select id="global-modo">
+                            <option value="revision" selected>Revisión del manager</option>
+                            <option value="automatica">Automática</option>
+                        </select>
                     </div>
 
-                    <div class="policy-footer">
-                        <span class="policy-footer-icon">⚠️</span>
-                        <span>2 políticas sin configurar (291 empleados) • No compensarán variaciones</span>
+                    <div class="form-group">
+                        <div class="form-label">
+                            Tipo de compensación
+                            <span class="tooltip-icon" data-tooltip="Holidays: añade horas a bolsa de vacaciones. Monetario: pago en nómina">ⓘ</span>
+                        </div>
+                        <select id="global-tipo">
+                            <option value="holidays" selected>Holidays (tiempo libre)</option>
+                            <option value="monetario">Monetario (en nómina)</option>
+                        </select>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>⚡ Impacto:</strong><br>
+                        • Modo <strong>Revisión</strong> → 481 empleados en lista del manager<br>
+                        • Modo <strong>Automática</strong> → 0 empleados en lista (todos auto-compensados)
                     </div>
                 </div>
+            </div>
 
-                <div class="warning-box" style="margin-top: 16px;">
-                    <strong>⚡ Impacto en vista del manager:</strong><br>
-                    Solo los empleados con modo <strong>Revisión</strong> aparecerán en la lista del manager
+            <!-- SECCIÓN 4: POLÍTICAS (solo visible si modo = policy) -->
+            <div class="collapsible-section collapsed" id="section-policies" style="display: none;">
+                <div class="section-header" onclick="toggleSection('section-policies')">
+                    <div class="section-header-left">
+                        <div class="section-header-text">
+                            <div class="section-title">Ámbitos de aplicación</div>
+                            <div class="section-description">Define cómo se compensa cada ámbito</div>
+                            <div class="section-summary" id="summary-policies">3 ámbitos configurados</div>
+                        </div>
+                    </div>
+                    <div class="collapse-icon">▶</div>
                 </div>
+                <div class="section-content">
+                    <div class="policy-table">
+                        <div class="policy-table-header">
+                            <div>Ámbito</div>
+                            <div>Modo</div>
+                            <div>Tipo</div>
+                            <div>Empleados</div>
+                        </div>
+                        
+                        <div class="policy-table-row">
+                            <div class="policy-name">ETT Eventos</div>
+                            <div>
+                                <select>
+                                    <option value="revision">Revisión</option>
+                                    <option value="automatica" selected>Automática</option>
+                                    <option value="no_compensar">No compensar</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select>
+                                    <option value="holidays">Holidays</option>
+                                    <option value="monetario" selected>Monetario</option>
+                                </select>
+                            </div>
+                            <div class="policy-employees">150</div>
+                        </div>
+                        
+                        <div class="policy-table-row">
+                            <div class="policy-name">Oficina</div>
+                            <div>
+                                <select>
+                                    <option value="revision" selected>Revisión</option>
+                                    <option value="automatica">Automática</option>
+                                    <option value="no_compensar">No compensar</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select>
+                                    <option value="holidays" selected>Holidays</option>
+                                    <option value="monetario">Monetario</option>
+                                </select>
+                            </div>
+                            <div class="policy-employees">30</div>
+                        </div>
+                        
+                        <div class="policy-table-row">
+                            <div class="policy-name">Managers</div>
+                            <div>
+                                <select>
+                                    <option value="revision">Revisión</option>
+                                    <option value="automatica">Automática</option>
+                                    <option value="no_compensar" selected>No compensar</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select disabled>
+                                    <option value="">—</option>
+                                </select>
+                            </div>
+                            <div class="policy-employees">10</div>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="margin-top: 16px;">
+                        <strong>⚡ Impacto:</strong> Solo los empleados con modo <strong>Revisión</strong> aparecerán en la lista del manager
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONES DE ACCIÓN -->
+            <div class="actions-row">
+                <button class="btn-primary">Guardar cambios</button>
+                <button class="btn-secondary">Cancelar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Toggle entre configuración global y por política
-        document.querySelectorAll('input[name="compensation-config"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const isGlobal = this.value === 'global';
-                document.getElementById('global-config').style.display = isGlobal ? 'block' : 'none';
-                document.getElementById('policy-config').style.display = isGlobal ? 'none' : 'block';
-            });
-        });
+        // Estado
+        let diasActivos = [1, 2, 3, 4, 5];
+        let festivosIncluidos = true;
+        let modoConfig = 'global';
+        let modoGlobal = 'revision';
+        let tipoGlobal = 'holidays';
 
-        // Global mode
-        document.getElementById('global-mode').addEventListener('change', function() {
-            const isAutomatic = this.value === 'automatica';
-            document.getElementById('global-impact-revision').style.display = isAutomatic ? 'none' : 'inline';
-            document.getElementById('global-impact-auto').style.display = isAutomatic ? 'inline' : 'none';
-        });
+        // Actualizar resúmenes
+        function actualizarResumenes() {
+            // Resumen jornada
+            const diasNombres = {
+                1: 'L', 2: 'M', 3: 'X', 4: 'J', 5: 'V', 6: 'S', 7: 'D'
+            };
+            let jornadaTexto = '';
+            if (JSON.stringify(diasActivos) === JSON.stringify([1,2,3,4,5])) {
+                jornadaTexto = 'L-V';
+            } else if (JSON.stringify(diasActivos) === JSON.stringify([1,2,3,4,5,6])) {
+                jornadaTexto = 'L-S';
+            } else if (JSON.stringify(diasActivos) === JSON.stringify([1,2,3,4,5,6,7])) {
+                jornadaTexto = 'L-D';
+            } else {
+                jornadaTexto = diasActivos.map(d => diasNombres[d]).join('-');
+            }
+            const festivosTexto = festivosIncluidos ? 'Festivos incluidos' : 'Festivos excluidos';
+            document.getElementById('summary-jornada').textContent = `${jornadaTexto} • ${festivosTexto}`;
 
-        // Presets
+            // Resumen revisión
+            const revisionTexto = modoConfig === 'global' ? 'Configuración única para todos' : 'Por ámbito de aplicación';
+            document.getElementById('summary-revision').textContent = revisionTexto;
+
+            // Resumen global
+            const modoTexto = modoGlobal === 'revision' ? 'Revisión del manager' : 'Automática';
+            const tipoTexto = tipoGlobal === 'holidays' ? 'Holidays' : 'Monetario';
+            document.getElementById('summary-global').textContent = `${modoTexto} • ${tipoTexto}`;
+        }
+
+        // Toggle activación
+        function toggleActivacion() {
+            const isActive = document.getElementById('toggle-activacion').checked;
+            const panel = document.getElementById('config-panel');
+            panel.classList.toggle('active', isActive);
+        }
+
+        // Toggle sección colapsable
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('collapsed');
+        }
+
+        // Presets días
         const presets = {
             'lv': [1, 2, 3, 4, 5],
             'ls': [1, 2, 3, 4, 5, 6],
             'ld': [1, 2, 3, 4, 5, 6, 7]
         };
 
-        document.querySelectorAll('.preset-pill').forEach(pill => {
-            pill.addEventListener('click', function() {
-                document.querySelectorAll('.preset-pill').forEach(p => p.classList.remove('active'));
-                this.classList.add('active');
-
-                const preset = this.dataset.preset;
-                if (preset !== 'custom') {
-                    const activeDays = presets[preset];
-                    document.querySelectorAll('.day-checkbox').forEach(item => {
-                        const dayNum = parseInt(item.dataset.day);
-                        const checkbox = item.querySelector('input[type="checkbox"]');
-                        const shouldBeActive = activeDays.includes(dayNum);
-                        checkbox.checked = shouldBeActive;
-                        item.classList.toggle('active', shouldBeActive);
-                    });
-                }
+        function applyPreset(preset) {
+            // Actualizar pills
+            document.querySelectorAll('.preset-pill').forEach(pill => {
+                pill.classList.remove('active');
             });
-        });
+            event.target.classList.add('active');
 
-        // Días de la semana
-        document.querySelectorAll('.day-checkbox').forEach(item => {
-            item.addEventListener('click', function() {
-                const checkbox = this.querySelector('input[type="checkbox"]');
-                checkbox.checked = !checkbox.checked;
-                this.classList.toggle('active', checkbox.checked);
-                document.querySelectorAll('.preset-pill').forEach(p => p.classList.remove('active'));
-                document.querySelector('.preset-pill[data-preset="custom"]').classList.add('active');
+            if (preset === 'custom') return;
+
+            // Actualizar días
+            diasActivos = presets[preset];
+            document.querySelectorAll('.day-button').forEach(btn => {
+                const day = parseInt(btn.dataset.day);
+                const isActive = diasActivos.includes(day);
+                btn.classList.toggle('active', isActive);
             });
-        });
 
-        // Festivos
-        document.querySelector('.festivo-toggle').addEventListener('click', function() {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            this.classList.toggle('active', checkbox.checked);
-        });
+            actualizarResumenes();
+        }
 
-        // Políticas
-        document.querySelectorAll('.policy-mode-select').forEach(select => {
-            select.addEventListener('change', function() {
-                const policy = this.dataset.policy;
-                const tipoSelect = document.querySelector(`.policy-tipo-select[data-policy="${policy}"]`);
-                if (this.value === 'no_compensar') {
-                    tipoSelect.disabled = true;
-                    tipoSelect.value = '';
-                } else {
-                    tipoSelect.disabled = false;
-                    if (!tipoSelect.value) tipoSelect.value = 'holidays';
-                }
+        // Toggle día individual
+        function toggleDay(day) {
+            const btn = event.target;
+            const isActive = btn.classList.contains('active');
+            
+            if (isActive) {
+                btn.classList.remove('active');
+                diasActivos = diasActivos.filter(d => d !== day);
+            } else {
+                btn.classList.add('active');
+                diasActivos.push(day);
+            }
+
+            // Marcar como personalizado
+            document.querySelectorAll('.preset-pill').forEach(pill => pill.classList.remove('active'));
+            document.querySelectorAll('.preset-pill')[3].classList.add('active');
+
+            actualizarResumenes();
+        }
+
+        // Toggle entre global y policies
+        function toggleModoConfig() {
+            const isGlobal = document.getElementById('modo-global').checked;
+            modoConfig = isGlobal ? 'global' : 'policy';
+            document.getElementById('section-global').style.display = isGlobal ? 'block' : 'none';
+            document.getElementById('section-policies').style.display = isGlobal ? 'none' : 'block';
+            actualizarResumenes();
+        }
+
+        // Inicializar listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Listener festivos
+            document.getElementById('festivos-check').addEventListener('change', function() {
+                festivosIncluidos = this.checked;
+                actualizarResumenes();
+            });
+
+            // Listener modo global
+            document.getElementById('global-modo').addEventListener('change', function() {
+                modoGlobal = this.value;
+                actualizarResumenes();
+            });
+
+            // Listener tipo global
+            document.getElementById('global-tipo').addEventListener('change', function() {
+                tipoGlobal = this.value;
+                actualizarResumenes();
             });
         });
     </script>
